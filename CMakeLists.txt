@@ -51,8 +51,13 @@ set(LIBMP3LAME_SOURCES
     lame-3.100/libmp3lame/vbrquantize.c
     lame-3.100/libmp3lame/VbrTag.c
     lame-3.100/libmp3lame/version.c
-    lame-3.100/libmp3lame/vector/xmm_quantize_sub.c
 )
+
+# SSE optimizations only for x86/x64 architectures
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64|x86_64|i[3-6]86")
+    list(APPEND LIBMP3LAME_SOURCES
+        lame-3.100/libmp3lame/vector/xmm_quantize_sub.c)
+endif()
 
 set(MPGLIB_SOURCES
     lame-3.100/mpglib/common.c
@@ -93,6 +98,13 @@ else()
         TAKEHIRO_IEEE754_HACK
         USE_LAYER_2
         HAVE_CONFIG_H
+    )
+endif()
+
+# SSE definitions only for x86/x64 architectures
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64|x86_64|i[3-6]86")
+    target_compile_definitions(mp3lame-static PRIVATE
+        HAVE_XMMINTRIN_H
     )
 endif()
 
