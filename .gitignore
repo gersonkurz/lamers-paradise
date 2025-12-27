@@ -7,6 +7,12 @@
 *.o
 *.obj
 
+# Build artifacts
+build-arm64/**
+build-x64/**
+build-x86/**
+
+
 # Precompiled Headers
 *.gch
 *.pch
