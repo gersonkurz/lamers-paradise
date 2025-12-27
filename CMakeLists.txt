@@ -51,6 +51,7 @@ set(LIBMP3LAME_SOURCES
     lame-3.100/libmp3lame/vbrquantize.c
     lame-3.100/libmp3lame/VbrTag.c
     lame-3.100/libmp3lame/version.c
+    lame-3.100/libmp3lame/vector/xmm_quantize_sub.c
 )
 
 set(MPGLIB_SOURCES
