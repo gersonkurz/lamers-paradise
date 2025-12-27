@@ -54,7 +54,7 @@ set(LIBMP3LAME_SOURCES
 )
 
 # SSE optimizations only for x86/x64 architectures
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64|x86_64|i[3-6]86")
+if(LAME_ARCH STREQUAL "x64" OR LAME_ARCH STREQUAL "x86")
     list(APPEND LIBMP3LAME_SOURCES
         lame-3.100/libmp3lame/vector/xmm_quantize_sub.c)
 endif()
@@ -102,7 +102,7 @@ else()
 endif()
 
 # SSE definitions only for x86/x64 architectures
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64|x86_64|i[3-6]86")
+if(LAME_ARCH STREQUAL "x64" OR LAME_ARCH STREQUAL "x86")
     target_compile_definitions(mp3lame-static PRIVATE
         HAVE_XMMINTRIN_H
     )
