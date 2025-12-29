@@ -128,11 +128,9 @@ typedef float       ieee754_float32_t;
 
 #define LAME_LIBRARY_BUILD
 
-/* SSE/SIMD support */
-#if defined(_M_X64) || defined(__x86_64__) || defined(__SSE__)
-#ifndef HAVE_XMMINTRIN_H
+/* SSE/SIMD support - only define for x86/x64 architectures */
+#if (defined(__i386__) || defined(__x86_64__) || defined(_M_IX86) || defined(_M_X64)) && !defined(HAVE_XMMINTRIN_H)
 #define HAVE_XMMINTRIN_H
-#endif
 #endif
 
 #endif /* LAME_CONFIG_H */

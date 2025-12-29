@@ -2,7 +2,16 @@ cmake_minimum_required(VERSION 3.16)
 project(lamers-paradise VERSION 3.100.1 LANGUAGES C)
 
 # Determine target architecture for output directory naming
-if(CMAKE_GENERATOR_PLATFORM)
+# Check CMAKE_OSX_ARCHITECTURES first for macOS cross-compilation
+if(APPLE AND CMAKE_OSX_ARCHITECTURES)
+    # macOS cross-compilation case
+    string(TOLOWER "${CMAKE_OSX_ARCHITECTURES}" LAME_ARCH)
+    if(LAME_ARCH MATCHES "x86_64")
+        set(LAME_ARCH "x64")
+    elseif(LAME_ARCH MATCHES "arm64")
+        set(LAME_ARCH "arm64")
+    endif()
+elseif(CMAKE_GENERATOR_PLATFORM)
     # MSVC generator platform (Win32, x64, ARM64)
     string(TOLOWER "${CMAKE_GENERATOR_PLATFORM}" LAME_ARCH)
     if(LAME_ARCH STREQUAL "win32")
